@@ -4,6 +4,11 @@ import Icon from "@/components/ui/icon";
 const HERO_IMG = "https://cdn.poehali.dev/projects/9a915484-42d3-4415-9942-f883e0098d6a/files/7a02cc74-6c5e-4afa-87c2-3e471b47d337.jpg";
 const MENU_IMG = "https://cdn.poehali.dev/projects/9a915484-42d3-4415-9942-f883e0098d6a/files/9b7e3332-e27a-4b7b-be1e-7da953d324f3.jpg";
 
+// Фото с сайта СВШ (скриншоты пользователя)
+const IMG_SCREEN1 = "https://cdn.poehali.dev/projects/9a915484-42d3-4415-9942-f883e0098d6a/bucket/c629709b-9473-49cb-a0e0-852054fed832.jpg";
+const IMG_SCREEN2 = "https://cdn.poehali.dev/projects/9a915484-42d3-4415-9942-f883e0098d6a/bucket/b1352f3b-22fc-4b8b-bda0-a04bb0f47dbf.jpg";
+const IMG_SCREEN3 = "https://cdn.poehali.dev/projects/9a915484-42d3-4415-9942-f883e0098d6a/bucket/02281d91-a3bc-4f94-8d1b-2d8120cd0181.jpg";
+
 type Section = "home" | "menu" | "about" | "delivery" | "promo" | "contacts";
 
 interface CartItem {
@@ -14,20 +19,21 @@ interface CartItem {
 }
 
 const menuItems = [
-  { id: 1, cat: "Классика", name: "Шаурма классическая", desc: "Курица, свежие овощи, фирменный соус", price: 290, weight: "380г" },
-  { id: 2, cat: "Классика", name: "Шаурма говяжья", desc: "Говядина, маринованный лук, томаты, зелень", price: 350, weight: "400г" },
-  { id: 3, cat: "Классика", name: "Шаурма XL", desc: "Двойная порция мяса, все начинки", price: 420, weight: "550г" },
-  { id: 4, cat: "Острая", name: "Шаурма по-арабски", desc: "Баранина, хариса, хрустящий лаваш", price: 380, weight: "420г" },
-  { id: 5, cat: "Острая", name: "Огненная шаурма", desc: "Курица, острый перец, чили-соус", price: 310, weight: "370г" },
-  { id: 6, cat: "Особые", name: "Шаурма-бокс", desc: "Лаваш + картофель фри + напиток", price: 490, weight: "600г" },
-  { id: 7, cat: "Особые", name: "Мини-шаурма 3 шт.", desc: "Три мини-шаурмы на выбор", price: 390, weight: "360г" },
-  { id: 8, cat: "Гарниры", name: "Картофель фри", desc: "Хрустящий, с фирменной солью", price: 130, weight: "200г" },
-  { id: 9, cat: "Напитки", name: "Айран домашний", desc: "Свежий, охлаждённый", price: 90, weight: "300мл" },
+  { id: 1, cat: "Шаурма", name: "Шаурма Курица Мини", desc: "Куриный шашлычок, салат из капусты, морковь по-корейски, солёные огурчики, сливочно-чесночный соус в хрустящем мини лаваше", price: 179, weight: "150г", hit: false, img: IMG_SCREEN1 },
+  { id: 2, cat: "Шаурма", name: "Шаурма Курица", desc: "Куриный шашлычок, салат из капусты, морковь по-корейски, солёные огурчики, сливочно-чесночный соус в хрустящем лаваше", price: 249, weight: "280г", hit: true, img: IMG_SCREEN1 },
+  { id: 3, cat: "Шаурма", name: "Шаурма Курица Макси", desc: "Двойная порция куриного шашлычка, салата из капусты, моркови по-корейски, солёных огурчиков, сливочно-чесночного соуса в хрустящем лаваше", price: 319, weight: "400г", hit: false, img: IMG_SCREEN2 },
+  { id: 4, cat: "Шаурма", name: "Шаурма Свинина Мини", desc: "Шашлычок из свинины, салат из капусты, морковь по-корейски, солёные огурчики, пикантный сливочно-чесночный соус в хрустящем мини лаваше", price: 199, weight: "150г", hit: false, img: IMG_SCREEN2 },
+  { id: 5, cat: "Шаурма", name: "Шаурма Кебаб", desc: "Куриный кебаб с капустой, луком, кинзой, солёными огурцами, помидорами и чесночным соусом в лаваше", price: 269, weight: "330г", hit: false, img: IMG_SCREEN3 },
+  { id: 6, cat: "Шаурма", name: "Шаурма Курица Фреш", desc: "Куриный шашлычок и свежие огурцы, капуста, помидоры, лук в хрустящем лаваше с чесночным соусом", price: 269, weight: "310г", hit: false, img: IMG_SCREEN3 },
+  { id: 7, cat: "Соусы", name: "Соус Heinz Сырный", desc: "Нежный соус со вкусом расплавленного сыра. Добавь для вкуса в любимые закуски!", price: 49, weight: "25мл", hit: false, img: "" },
+  { id: 8, cat: "Соусы", name: "Соус Heinz Кисло-сладкий", desc: "Особый соус с кисло-сладким вкусом. Добавь для вкуса в любимые закуски!", price: 49, weight: "25мл", hit: false, img: "" },
+  { id: 9, cat: "Фритюр", name: "Картофель фри", desc: "Хрустящий картофель фри, приготовленный во фритюре", price: 119, weight: "150г", hit: false, img: "" },
+  { id: 10, cat: "Боксы", name: "Бокс Курица", desc: "Шаурма Курица + картофель фри + соус на выбор", price: 379, weight: "450г", hit: false, img: "" },
 ];
 
 const promos = [
-  { id: 1, tag: "АКЦИЯ", title: "2+1 БЕСПЛАТНО", desc: "Купи две шаурмы — третья в подарок. Каждый вторник и четверг.", badge: "ВТ — ЧТ", color: "from-orange-900/60 to-stone-900" },
-  { id: 2, tag: "СКИДКА 15%", title: "ПЕРВЫЙ ЗАКАЗ", desc: "При регистрации на сайте скидка 15% на первый онлайн-заказ.", badge: "НОВЫМ", color: "from-amber-900/60 to-stone-900" },
+  { id: 1, tag: "БОНУС", title: "КЭШБЕК 3%", desc: "Зарегистрируйся в программе лояльности СВШ Бонус и получай кэшбек с каждого заказа.", badge: "БОНУС", color: "from-orange-900/60 to-stone-900" },
+  { id: 2, tag: "СКИДКА", title: "ПЕРВЫЙ ЗАКАЗ", desc: "Скидка на первый онлайн-заказ для новых гостей. Успей воспользоваться!", badge: "НОВЫМ", color: "from-amber-900/60 to-stone-900" },
   { id: 3, tag: "КОМБО", title: "БИЗНЕС-ЛАНЧ", desc: "Шаурма + гарнир + напиток за 390 рублей. Ежедневно с 11 до 15.", badge: "11:00–15:00", color: "from-yellow-900/60 to-stone-900" },
 ];
 
@@ -212,19 +218,26 @@ export default function App() {
                 </button>
               </div>
               <div className="grid sm:grid-cols-3 gap-4">
-                {menuItems.slice(0, 3).map(item => (
+                {menuItems.filter(i => i.cat === "Шаурма").slice(0, 3).map(item => (
                   <div key={item.id} className="bg-card border border-border hover-lift group overflow-hidden">
-                    <div className="h-36 bg-gradient-to-br from-amber-900/30 to-stone-800 flex items-center justify-center">
-                      <span className="text-5xl">🌯</span>
+                    <div className="h-44 overflow-hidden relative">
+                      {item.img ? (
+                        <img src={item.img} alt={item.name} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-amber-900/30 to-stone-800 flex items-center justify-center">
+                          <span className="text-5xl">🌯</span>
+                        </div>
+                      )}
+                      {item.hit && <span className="absolute top-3 right-3 bg-gold text-background text-xs font-display font-bold px-2 py-1 tracking-wider">ХИТ</span>}
                     </div>
                     <div className="p-5">
                       <div className="flex items-start justify-between mb-1">
                         <h3 className="font-display font-semibold tracking-wide text-foreground">{item.name}</h3>
                         <span className="text-muted-foreground text-xs ml-2 mt-1">{item.weight}</span>
                       </div>
-                      <p className="text-muted-foreground text-sm mb-4">{item.desc}</p>
+                      <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{item.desc}</p>
                       <div className="flex items-center justify-between">
-                        <span className="font-display text-xl font-bold text-gold">{item.price} ₽</span>
+                        <span className="font-display text-xl font-bold text-gold">от {item.price} ₽</span>
                         <button onClick={() => addToCart(item)} className="bg-gold text-background text-sm font-display font-semibold tracking-wider px-4 py-2 hover:bg-amber-400 transition-colors">
                           В КОРЗИНУ
                         </button>
@@ -240,7 +253,7 @@ export default function App() {
               onClick={() => setActive("promo")}
             >
               <p className="font-display text-background text-3xl sm:text-4xl font-bold tracking-widest uppercase">
-                Каждый вторник: 2+1 бесплатно →
+                Программа лояльности СВШ Бонус — кэшбек 3% →
               </p>
             </section>
           </div>
@@ -268,9 +281,16 @@ export default function App() {
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filtered.map(item => (
-                <div key={item.id} className="bg-card border border-border hover-lift flex flex-col">
-                  <div className="h-28 bg-gradient-to-br from-amber-900/30 to-stone-800 flex items-center justify-center">
-                    <span className="text-4xl">{item.cat === "Напитки" ? "🥛" : item.cat === "Гарниры" ? "🍟" : "🌯"}</span>
+                <div key={item.id} className="bg-card border border-border hover-lift flex flex-col group overflow-hidden">
+                  <div className="h-44 relative overflow-hidden">
+                    {item.img ? (
+                      <img src={item.img} alt={item.name} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-amber-900/30 to-stone-800 flex items-center justify-center">
+                        <span className="text-4xl">{item.cat === "Соусы" ? "🫙" : item.cat === "Фритюр" ? "🍟" : item.cat === "Боксы" ? "📦" : "🌯"}</span>
+                      </div>
+                    )}
+                    {item.hit && <span className="absolute top-3 right-3 bg-gold text-background text-xs font-display font-bold px-2 py-1 tracking-wider">ХИТ ПРОДАЖ</span>}
                   </div>
                   <div className="p-5 flex flex-col flex-1">
                     <div className="flex items-start justify-between mb-1">
@@ -279,7 +299,7 @@ export default function App() {
                     </div>
                     <p className="text-muted-foreground text-sm mb-4 flex-1">{item.desc}</p>
                     <div className="flex items-center justify-between mt-auto">
-                      <span className="font-display text-2xl font-bold text-gold">{item.price} ₽</span>
+                      <span className="font-display text-2xl font-bold text-gold">от {item.price} ₽</span>
                       <button
                         onClick={() => addToCart(item)}
                         className="bg-gold text-background text-sm font-display font-semibold tracking-wider px-4 py-2 hover:bg-amber-400 transition-colors"
@@ -476,7 +496,7 @@ export default function App() {
               <div className="grid sm:grid-cols-2 gap-6">
                 {[
                   { code: "ПЕРВЫЙ15", desc: "Скидка 15% на первый заказ", valid: "Бессрочно" },
-                  { code: "VТОРНИК", desc: "Скидка 10% по вторникам", valid: "Каждый вторник" },
+                  { code: "СВШ3", desc: "Кэшбек 3% за регистрацию в программе лояльности", valid: "Постоянно" },
                 ].map((pc, i) => (
                   <div key={i} className="border border-border p-5 flex items-center justify-between gap-4">
                     <div>
@@ -508,15 +528,14 @@ export default function App() {
             <div className="grid lg:grid-cols-2 gap-12 mb-12">
               <div className="space-y-4">
                 {[
-                  { icon: "Phone", label: "Телефон", value: "+7 (900) 000-00-00", sub: "Ежедневно 10:00 — 23:00" },
-                  { icon: "Mail", label: "Email", value: "info@shaur.ru", sub: "Ответим в течение дня" },
-                  { icon: "MapPin", label: "Главная точка", value: "ул. Центральная, 15", sub: "Ежедневно 10:00 — 23:00" },
-                  { icon: "MapPin", label: "Точка №2", value: "пр. Ленина, 42", sub: "Ежедневно 10:00 — 22:00" },
-                  { icon: "MessageSquare", label: "WhatsApp", value: "+7 (900) 000-00-00", sub: "Быстрые ответы" },
+                  { icon: "Mail", label: "Email", value: "info@svsh.info", sub: "Ответим в течение дня" },
+                  { icon: "MapPin", label: "Юридический адрес", value: "г. Москва, ул. Малая Тульская, д. 16, пом. 1Б/1", sub: "ООО «СВШ» · ИНН 7105051710" },
+                  { icon: "Globe", label: "Сайт", value: "свш.рф", sub: "Федеральная сеть кафе" },
+                  { icon: "Building2", label: "ОГРН", value: "1177154017260", sub: "Зарегистрирована в 2017 году" },
                 ].map((c, i) => (
                   <div key={i} className="bg-card border border-border p-5 flex items-start gap-4">
                     <div className="w-10 h-10 bg-gold/10 flex items-center justify-center shrink-0">
-                      <Icon name={c.icon as "Phone" | "Mail" | "MapPin" | "MessageSquare"} size={18} className="text-gold" />
+                      <Icon name={c.icon as "Mail" | "MapPin" | "Globe" | "Building2"} size={18} className="text-gold" />
                     </div>
                     <div>
                       <p className="text-muted-foreground text-xs uppercase tracking-wider mb-0.5">{c.label}</p>
@@ -558,8 +577,10 @@ export default function App() {
               ))}
             </div>
           </div>
-          <div className="border-t border-border mt-6 pt-6 text-center text-muted-foreground text-xs">
-            © 2024 ШАУР. Все права защищены. Доставка ежедневно 10:00 — 23:00
+          <div className="border-t border-border mt-6 pt-6 text-center text-muted-foreground text-xs space-y-1">
+            <p>ООО «СВШ» · ИНН 7105051710 · ОГРН 1177154017260</p>
+            <p>115191, г. Москва, ул. Малая Тульская, д. 16, пом. 1Б/1 · info@svsh.info</p>
+            <p className="mt-2">© 2024 СВШ — Самая вкусная шаурма. Федеральная сеть кафе быстрого питания.</p>
           </div>
         </div>
       </footer>
