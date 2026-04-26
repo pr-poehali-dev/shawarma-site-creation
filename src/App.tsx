@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Icon from "@/components/ui/icon";
+import Robot from "@/components/Robot";
 
 const HERO_IMG = "https://cdn.poehali.dev/projects/9a915484-42d3-4415-9942-f883e0098d6a/files/7a02cc74-6c5e-4afa-87c2-3e471b47d337.jpg";
 
@@ -31,45 +32,7 @@ const promos = [
   { id: 3, tag: "ЕЖЕДНЕВНО 11–15", title: "БИЗНЕС-ЛАНЧ", desc: "Шаурма + гарнир + соус по специальной цене. Сытный обед без лишних затрат.", badge: "ЛАНЧ", icon: "Clock" },
 ];
 
-// Шаги экскурсии робота
-const tourSteps = [
-  {
-    id: 0,
-    text: "Привет! 👋 Я Шаур — ваш цифровой помощник. Добро пожаловать в СВШ — Самую Вкусную Шаурму! Позвольте показать вам наш сайт.",
-    highlight: null,
-    action: null,
-  },
-  {
-    id: 1,
-    text: "🌯 Здесь вы можете выбрать блюда из нашего меню. Шаурма курица, свинина, кебаб — на любой вкус! Нажмите «Меню» чтобы увидеть все позиции.",
-    highlight: "menu",
-    action: "menu",
-  },
-  {
-    id: 2,
-    text: "🛵 В разделе «Доставка» вы оформляете заказ. Укажите адрес, и мы привезём горячую шаурму. Минимальный заказ — 500 ₽, доставка за 40 минут!",
-    highlight: "delivery",
-    action: "delivery",
-  },
-  {
-    id: 3,
-    text: "🎁 Загляните в раздел «Акции»! Программа лояльности СВШ Бонус даёт кэшбек 3% с каждого заказа. Выгодно и вкусно!",
-    highlight: "promo",
-    action: "promo",
-  },
-  {
-    id: 4,
-    text: "📞 Остались вопросы? В разделе «Контакты» наш email: info@svsh.info. Мы федеральная сеть — всегда на связи и готовы помочь!",
-    highlight: "contacts",
-    action: "contacts",
-  },
-  {
-    id: 5,
-    text: "🚀 Экскурсия завершена! Выбирайте любимую шаурму, добавляйте в корзину и оформляйте заказ. Вкусного вам дня! 😋",
-    highlight: null,
-    action: "home",
-  },
-];
+
 
 // Плавающие частицы
 function Particles() {
@@ -104,58 +67,17 @@ export default function App() {
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Робот-гид
-  const [tourVisible, setTourVisible] = useState(false);
-  const [tourStep, setTourStep] = useState(0);
-  const [tourTyped, setTourTyped] = useState("");
-  const [tourHighlight, setTourHighlight] = useState<string | null>(null);
-  const typingRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [robotVisible, setRobotVisible] = useState(false);
 
   const cartCount = cart.reduce((s, i) => s + i.qty, 0);
   const cartTotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
   const discount = promoApplied ? Math.round(cartTotal * 0.1) : 0;
   const finalTotal = cartTotal - discount;
 
-  // Показать робота через 1.5 сек после загрузки
   useEffect(() => {
-    const t = setTimeout(() => setTourVisible(true), 1500);
+    const t = setTimeout(() => setRobotVisible(true), 1200);
     return () => clearTimeout(t);
   }, []);
-
-  // Эффект печатания текста
-  useEffect(() => {
-    if (!tourVisible) return;
-    const step = tourSteps[tourStep];
-    setTourTyped("");
-    setTourHighlight(step.highlight);
-    let i = 0;
-    const tick = () => {
-      i++;
-      setTourTyped(step.text.slice(0, i));
-      if (i < step.text.length) {
-        typingRef.current = setTimeout(tick, 22);
-      }
-    };
-    typingRef.current = setTimeout(tick, 300);
-    return () => { if (typingRef.current) clearTimeout(typingRef.current); };
-  }, [tourStep, tourVisible]);
-
-  function nextTourStep() {
-    const step = tourSteps[tourStep];
-    if (step.action) setActive(step.action as Section);
-    if (tourStep < tourSteps.length - 1) {
-      setTourStep(s => s + 1);
-    } else {
-      setTourVisible(false);
-      setTourHighlight(null);
-    }
-  }
-
-  function skipTour() {
-    setTourVisible(false);
-    setTourHighlight(null);
-    if (typingRef.current) clearTimeout(typingRef.current);
-  }
 
   const navItems: { id: Section; label: string }[] = [
     { id: "home", label: "Главная" },
@@ -201,64 +123,15 @@ export default function App() {
       <Particles />
 
       {/* === РОБОТ-ГИД === */}
-      {tourVisible && (
-        <div className="fixed bottom-6 left-4 right-4 sm:left-auto sm:right-6 sm:w-[380px] z-[100] animate-slide-up">
-          <div className="relative bg-card border border-gold/40 shadow-2xl shadow-gold/10 overflow-hidden">
-            {/* Прогресс */}
-            <div className="h-0.5 bg-border">
-              <div
-                className="h-full bg-gold transition-all duration-500"
-                style={{ width: `${((tourStep + 1) / tourSteps.length) * 100}%` }}
-              />
-            </div>
-
-            <div className="p-5 flex gap-4">
-              {/* Робот */}
-              <div className="shrink-0 flex flex-col items-center gap-1">
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-gold to-amber-600 flex items-center justify-center text-2xl shadow-lg shadow-gold/30 robot-bounce">
-                  🤖
-                </div>
-                <span className="text-gold text-xs font-display tracking-wider font-bold">ШАУР</span>
-              </div>
-
-              <div className="flex-1 min-w-0">
-                <p className="text-foreground text-sm leading-relaxed min-h-[60px]">
-                  {tourTyped}
-                  <span className="inline-block w-0.5 h-4 bg-gold ml-0.5 animate-pulse align-middle" />
-                </p>
-
-                <div className="flex items-center justify-between mt-4">
-                  <span className="text-muted-foreground text-xs">{tourStep + 1} / {tourSteps.length}</span>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={skipTour}
-                      className="text-muted-foreground text-xs hover:text-foreground transition-colors px-3 py-1.5"
-                    >
-                      Пропустить
-                    </button>
-                    <button
-                      onClick={nextTourStep}
-                      className="bg-gold text-background font-display font-bold text-xs tracking-wider px-4 py-1.5 hover:bg-amber-400 transition-colors flex items-center gap-1"
-                    >
-                      {tourStep < tourSteps.length - 1 ? "ДАЛЕЕ" : "ГОТОВО"}
-                      <Icon name="ChevronRight" size={12} />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Кнопка вызова робота */}
-      {!tourVisible && (
+      {robotVisible ? (
+        <Robot onNavigate={(s) => setActive(s as Section)} onClose={() => setRobotVisible(false)} />
+      ) : (
         <button
-          onClick={() => { setTourStep(0); setTourVisible(true); }}
-          className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-gold to-amber-600 flex items-center justify-center text-2xl shadow-xl shadow-gold/40 hover:scale-110 transition-transform"
+          onClick={() => setRobotVisible(true)}
+          className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-gold to-amber-600 flex items-center justify-center shadow-xl shadow-gold/40 hover:scale-110 transition-transform robot-bounce"
           title="Вызвать помощника"
         >
-          🤖
+          <span className="text-2xl">🤖</span>
         </button>
       )}
 
