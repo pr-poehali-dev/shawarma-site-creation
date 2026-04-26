@@ -87,26 +87,21 @@
   }
 
   .animate-fade-in {
-    animation: fadeIn 0.6s ease forwards;
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
   .animate-slide-up {
-    animation: slideUp 0.5s ease forwards;
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
   @keyframes fadeIn {
     from {
       opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(12px);
     }
     to {
       opacity: 1;
@@ -114,18 +109,69 @@
     }
   }
 
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) translateX(0);
+    }
+    33% {
+      transform: translateY(-18px) translateX(8px);
+    }
+    66% {
+      transform: translateY(10px) translateX(-8px);
+    }
+  }
+
+  @keyframes robotBounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  .robot-bounce {
+    animation: robotBounce 2.2s ease-in-out infinite;
+  }
+
   .hover-lift {
     transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
+      transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.25s ease;
   }
 
   .hover-lift:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    transform: translateY(-5px);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
   }
 
-  .diagonal-section {
-    clip-path: polygon(0 0, 100% 3%, 100% 97%, 0 100%);
+  .glow-gold {
+    text-shadow:
+      0 0 60px hsla(32, 90%, 52%, 0.5),
+      0 0 120px hsla(32, 90%, 52%, 0.2);
   }
 }
